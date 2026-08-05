@@ -1,3 +1,7 @@
+brain-tumor-mri-classification-cnn
+
+CNN-based deep learning system that detects whether a brain MRI scan contains a tumor and, if detected, classifies it as glioma, meningioma, or pituitary tumor using a two-stage CNN pipeline built with TensorFlow/Keras.
+
 🧠 Brain Tumor Detection & Classification (CNN)
 
 <p align="center">
@@ -35,7 +39,7 @@ Given a brain MRI scan, this project implements a structured diagnostic pipeline
     * Meningioma
     * Pituitary Tumor
 
-Trained on the Brain Tumor MRI Dataset, the model follows a cascaded deep learning approach designed to improve interpretability and mimic a realistic diagnostic workflow.
+Trained on the Brain Tumor MRI Dataset, the model follows a cascaded deep learning approach that mirrors a realistic diagnostic workflow.
 
 ⸻
 
@@ -70,7 +74,7 @@ Conv2D + MaxPooling	128 filters, 3×3, ReLU
 Flatten	—
 Dense	512 units, ReLU
 Dropout	0.5
-Dense (Output)	Softmax Output Layer
+Dense (Output)	Output units matching the classification scope, Softmax
 
 Training config: image size 150×150, batch size 32, 25 epochs, Adam optimizer, categorical cross-entropy loss, with data augmentation (rotation, shift, shear, zoom, and horizontal flipping).
 
@@ -78,25 +82,18 @@ Training config: image size 150×150, batch size 32, 25 epochs, Adam optimizer, 
 
 📊 Results
 
-Stage	Task	Accuracy
-Stage 1	Tumor Detection (Binary Classification)	91.0%
-Stage 2	Tumor Type Classification	83.8%
+Stage	Accuracy
+Tumor Detection (Binary Classification)	91.0%
+Tumor Type Classification	83.8%
 
-Additional evaluation metrics include:
-
-* Precision
-* Recall
-* F1-Score
-* Confusion Matrix
-
-The model demonstrates strong performance in detecting brain tumors and classifying major tumor categories through a cascaded CNN framework.
+Full precision, recall, F1-score per class, and confusion matrices are generated during model evaluation.
 
 ⸻
 
 📁 Repository Contents
 
 File	Description
-brain_tumor_detection.ipynb	Complete pipeline including preprocessing, CNN training, evaluation, and visualization
+brain_tumor_cnn.py	Core pipeline: data loading, preprocessing, CNN architecture, training, evaluation, and metrics
 Brain_Tumor_Diagnosis_Deck.pptx	Presentation slides summarizing the project
 requirements.txt	Python dependencies
 
@@ -110,8 +107,8 @@ cd brain-tumor-mri-classification-cnn
 # 2. Install dependencies
 pip install -r requirements.txt
 # 3. Download the dataset from Kaggle and arrange it (see structure below)
-# 4. Run the notebook
-jupyter notebook brain_tumor_detection.ipynb
+# 4. Run training
+python brain_tumor_cnn.py
 
 🗂️ Dataset Structure
 
@@ -136,8 +133,7 @@ Dataset source: Brain Tumor MRI Dataset — Kaggle
 * Python 3.9+
 * TensorFlow / Keras — model building & training
 * NumPy / Pandas — data handling
-* Matplotlib / Seaborn — visualization
-* Jupyter Notebook
+* Matplotlib / Seaborn — visualization (accuracy/loss curves, confusion matrices, and performance analysis)
 
 ⸻
 
