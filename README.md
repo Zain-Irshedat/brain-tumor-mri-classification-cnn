@@ -100,13 +100,12 @@ requirements.txt	Python dependencies
 
 🚀 Getting Started
 
-# 1. Clone the repository
+1. Clone the repository
 git clone https://github.com/Zain-Irshedat/brain-tumor-mri-classification-cnn.git
 cd brain-tumor-mri-classification-cnn
-# 2. Install dependencies
+2. Install dependencies
 pip install -r requirements.txt
-# 3. Download the dataset from Kaggle and arrange it (see structure below)
-# 4. Run training
+3. Download the dataset from Kaggle and arrange it (see structure below)4. Run training
 python brain_tumor_cnn.py
 
 🗂️ Dataset Structure
