@@ -1,4 +1,4 @@
-🧠 Brain Tumor Detection and Classification using a Two-Stage CNN Pipeline
+🧠 Brain Tumor Detection & Classification (CNN)
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white" alt="Python">
@@ -7,137 +7,72 @@
   <img src="https://img.shields.io/badge/License-MIT-lightgrey" alt="License">
 </p>
 
-A deep learning system for automated brain tumor diagnosis from MRI scans using a two-stage Convolutional Neural Network (CNN) pipeline. The model first determines whether a tumor is present and then classifies the detected tumor into one of three major categories: Glioma, Meningioma, or Pituitary tumor.
+A deep learning system that analyzes brain MRI scans through a two-stage classification pipeline to first detect the presence of a tumor and then classify its specific type. Built end-to-end with a custom Convolutional Neural Network (CNN) in TensorFlow/Keras.
 
 ⸻
 
 📋 Table of Contents
 
 * Overview
-* Dataset
-* Methodology
-* Two-Stage Classification Pipeline
+* How It Works (Two-Stage Pipeline)
 * Model Architecture
 * Results
-* Repository Structure
+* Repository Contents
 * Getting Started
+* Dataset Structure
 * Tech Stack
-* Future Improvements
 * Disclaimer
 
 ⸻
 
 🔍 Overview
 
-Brain tumors are among the most serious neurological conditions, where early and accurate diagnosis can significantly improve treatment planning and patient outcomes. Manual MRI interpretation requires expert radiologists and can be time-consuming.
+Given a brain MRI scan, this project implements a structured diagnostic pipeline divided into two distinct classification stages:
 
-This project explores the use of Deep Learning and Computer Vision techniques to assist in brain tumor diagnosis by automatically analyzing MRI scans through a structured two-stage classification approach.
+1. Stage 1 (Binary Classification): Determines whether the brain MRI scan is healthy (No Tumor) or contains an abnormality (Tumor).
+2. Stage 2 (Multi-class Classification): If a tumor is detected, it further categorizes the specific type into one of three major classes:
+    * Glioma
+    * Meningioma
+    * Pituitary Tumor
 
-⸻
-
-📂 Dataset
-
-This project uses the Brain Tumor MRI Dataset from Kaggle, containing MRI scans divided into four categories:
-
-* Glioma
-* Meningioma
-* Pituitary Tumor
-* No Tumor
-
-The dataset includes separate training and testing subsets and provides sufficient diversity for evaluating CNN-based classification models.
-
-Dataset Source:
-https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
+Trained on the Brain Tumor MRI Dataset, the model follows a cascaded deep learning approach designed to improve interpretability and mimic a realistic diagnostic workflow.
 
 ⸻
 
-⚙️ Methodology
-
-The project follows a cascaded classification strategy designed to simplify the diagnostic process.
-
-Data Preprocessing
-
-* Image resizing
-* Normalization
-* Data augmentation
-* Dataset balancing and preparation
-
-Data Augmentation Techniques
-
-* Rotation
-* Width and height shifting
-* Zooming
-* Shearing
-* Horizontal flipping
-
-These techniques help improve model generalization and reduce overfitting.
-
-⸻
-
-🔄 Two-Stage Classification Pipeline
+⚙️ How It Works (Two-Stage Pipeline)
 
 MRI Scan
-   │
-   ▼
-Preprocessing & Augmentation
-   │
-   ▼
-Stage 1: Tumor Detection
-(Tumor vs No Tumor)
-   │
-   ├── No Tumor
-   │      ▼
-   │  Final Result
-   │
-   └── Tumor
-          ▼
-Stage 2: Tumor Classification
+│
+▼
+[Preprocessing & Augmentation]
+│
+▼
+Stage 1: Binary Classification (Tumor vs. No Tumor)
+├── If "No Tumor" ──> Result: No Tumor Detected
+└── If "Tumor" ──> Passes to Stage 2
+│
+▼
+Stage 2: Multi-class Classification
 (Glioma / Meningioma / Pituitary)
-          ▼
-      Final Diagnosis
-
-Stage 1 – Binary Classification
-
-Determines whether an MRI scan contains a brain tumor.
-
-Classes:
-
-* Tumor
-* No Tumor
-
-Stage 2 – Multi-Class Classification
-
-If a tumor is detected, the MRI scan is passed to a second CNN model that classifies the tumor type into:
-
-* Glioma
-* Meningioma
-* Pituitary Tumor
-
-This cascaded approach improves interpretability and mirrors a realistic clinical diagnostic workflow.
+│
+▼
+Final Diagnosis
 
 ⸻
 
 🏗️ Model Architecture
 
-The CNN architecture consists of multiple convolutional and pooling layers followed by fully connected layers.
+Layer	Details
+Conv2D + MaxPooling	32 filters, 3×3, ReLU
+Conv2D + MaxPooling	64 filters, 3×3, ReLU
+Conv2D + MaxPooling	128 filters, 3×3, ReLU
+Conv2D + MaxPooling	128 filters, 3×3, ReLU
+Flatten	—
+Dense	512 units, ReLU
+Dropout	0.5
+Dense (Output)	Softmax Output Layer
 
-Main Components
-
-* Convolutional Layers
-* Max Pooling Layers
-* ReLU Activation Functions
-* Dropout Regularization
-* Fully Connected Dense Layers
-* Softmax Output Layer
-
-Training Configuration
-
-Parameter	Value
-Image Size	150 × 150
-Batch Size	32
-Epochs	25
-Optimizer	Adam
-Loss Function	Categorical Cross-Entropy
+Training config: image size 150×150, batch size 32, 25 epochs, Adam optimizer, categorical cross-entropy loss, with data augmentation (rotation, shift, shear, zoom, and horizontal flipping).
 
 ⸻
 
@@ -147,8 +82,6 @@ Stage	Task	Accuracy
 Stage 1	Tumor Detection (Binary Classification)	91.0%
 Stage 2	Tumor Type Classification	83.8%
 
-The model demonstrates strong performance in identifying brain tumors and provides reliable classification of major tumor categories through a cascaded CNN framework.
-
 Additional evaluation metrics include:
 
 * Precision
@@ -156,31 +89,31 @@ Additional evaluation metrics include:
 * F1-Score
 * Confusion Matrix
 
+The model demonstrates strong performance in detecting brain tumors and classifying major tumor categories through a cascaded CNN framework.
+
 ⸻
 
-📁 Repository Structure
+📁 Repository Contents
 
-├── Brain_Tumor_Detection.ipynb
-├── Brain_Tumor_Diagnosis_Deck.pptx
-├── requirements.txt
-└── README.md
+File	Description
+brain_tumor_detection.ipynb	Complete pipeline including preprocessing, CNN training, evaluation, and visualization
+Brain_Tumor_Diagnosis_Deck.pptx	Presentation slides summarizing the project
+requirements.txt	Python dependencies
 
 ⸻
 
 🚀 Getting Started
 
-Clone the Repository
-
+# 1. Clone the repository
 git clone https://github.com/Zain-Irshedat/brain-tumor-mri-classification-cnn.git
 cd brain-tumor-mri-classification-cnn
-
-Install Dependencies
-
+# 2. Install dependencies
 pip install -r requirements.txt
+# 3. Download the dataset from Kaggle and arrange it (see structure below)
+# 4. Run the notebook
+jupyter notebook brain_tumor_detection.ipynb
 
-Download Dataset
-
-Download the dataset from Kaggle and organize it as follows:
+🗂️ Dataset Structure
 
 dataset/
 ├── Training/
@@ -194,41 +127,20 @@ dataset/
     ├── notumor/
     └── pituitary/
 
-Run the Notebook
-
-Open and run:
-
-Brain_Tumor_Detection.ipynb
+Dataset source: Brain Tumor MRI Dataset — Kaggle
 
 ⸻
 
 🛠️ Tech Stack
 
-* Python
-* TensorFlow
-* Keras
-* NumPy
-* Pandas
-* Matplotlib
-* Seaborn
+* Python 3.9+
+* TensorFlow / Keras — model building & training
+* NumPy / Pandas — data handling
+* Matplotlib / Seaborn — visualization
 * Jupyter Notebook
-
-⸻
-
-🚀 Future Improvements
-
-Potential enhancements include:
-
-* Transfer Learning (ResNet, EfficientNet)
-* Model Explainability using Grad-CAM
-* Hyperparameter Optimization
-* Clinical Validation on Larger MRI Datasets
-* Deployment as a Web Application
 
 ⸻
 
 ⚠️ Disclaimer
 
-This project was developed for educational and research purposes only.
-
-It is not intended for clinical diagnosis, medical decision-making, or patient treatment. Any medical application would require extensive validation, regulatory approval, and evaluation by healthcare professionals.
+This project is for educational and research purposes only and is not intended for clinical or diagnostic use.
