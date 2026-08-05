@@ -1,6 +1,5 @@
 brain-tumor-mri-classification-cnn
 
-CNN-based deep learning system that detects whether a brain MRI scan contains a tumor and, if detected, classifies it as glioma, meningioma, or pituitary tumor using a two-stage CNN pipeline built with TensorFlow/Keras.
 
 🧠 Brain Tumor Detection & Classification (CNN)
 
